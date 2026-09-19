@@ -18,6 +18,35 @@
     })();
 
     // =============================================
+    // MOBILE NAVIGATION
+    // =============================================
+    (function mobileNavigation() {
+      const toggle = document.querySelector('.menu-toggle');
+      const navigation = document.getElementById('primary-navigation');
+      if (!toggle || !navigation) return;
+
+      function closeMenu() {
+        navigation.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = navigation.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      });
+
+      navigation.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
+      });
+    })();
+
+    // =============================================
     // TYPING EFFECT — simple, clear DS phrases
     // =============================================
     (function typeEffect() {
